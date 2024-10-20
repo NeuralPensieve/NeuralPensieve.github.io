@@ -1,5 +1,1 @@
-Here you can say lots of fun things about your site.
-
-Maybe say a some things about yourself.
-
-Or maybe what you plan to blog about.
+I am an ex-Amazon senior applied scientist, and in this blog, I plan to share my thoughts on AI, and my experimentations with learning more about AI.
