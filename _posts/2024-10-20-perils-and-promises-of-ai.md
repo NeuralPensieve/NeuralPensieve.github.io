@@ -1,7 +1,7 @@
 # Perils and Promises of AI
 
 <div style="text-align: center;">
-    <img src="/img/perils_of_ai/robot_sign.png" alt="" style="width: 50%;">
+    <img src="/img/perils_of_ai/robot_sign.png" alt="" style="width: 100%;">
 </div>
 
 With the rapid rise of Generative AI and its growing influence, humanity is entering an era of uncertainty, particularly concerning AI's negative impact on society. The unprecedented capabilities of AI are both exciting and alarming, as they hold the potential to radically transform industries, economies, and human interactions—for better or worse.
