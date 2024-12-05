@@ -32,7 +32,8 @@ We could also get a bit fancier, and implement a bayesian logistic regression mo
 
 Here is a simple implementation in Python:
 
-https://github.com/NeuralPensieve/Vocabulary-Knowledge-Thompson-Sampling
+[Vocabulary Knowledge Quiz Using Thompson Sampling](https://github.com/NeuralPensieve/Vocabulary-Knowledge-Thompson-Sampling)
+
 
 In order to see how well the algorithm works, we can simply create a user simulation with a known $\mu$ and $\sigma$, and try to iteratively find the distribution. Here is the results for the non-bayesian approach:
 
