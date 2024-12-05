@@ -1,4 +1,4 @@
-# What is the extensive is your vocabulary?
+# How many words do you know?
 
 A few years back, I started wondering: what’s the minimum number of questions you’d need to ask someone to figure out the size of their vocabulary? Of course, asking random questions is not exactly optimal, and clearly the best solution would involve some kind of exploration-exploitation trade-off, but I never got around to actually working on it. Now that I’ve got some free time, I figured I’d give it a shot.
 
