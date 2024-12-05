@@ -20,9 +20,9 @@ where $\mu$ and $\sigma$ represent the mean and standard deviation of the distri
 
 Algorithm: Iterative Prior Update
 
-	1.	Sample a random word, $w_i$, from the prior and ask the user if they know the word. The answer, $y_i$, is binary: {0, 1}.
-	2.	Add the data point $(x_i, y_i)$ to the dataset, $D = {(x_i, y_i)}_{i=1}^N$.
-	3.	Update the prior by fitting Equation (1) to D using maximum likelihood estimation, and calculate the new values of $\mu$ and $\sigma$.
+1.	Sample a random word, $w_i$, from the prior and ask the user if they know the word. The answer, $y_i$, is binary: {0, 1}.
+2.	Add the data point $(x_i, y_i)$ to the dataset, $D = {(x_i, y_i)}_{i=1}^N$.
+3.	Update the prior by fitting Equation (1) to D using maximum likelihood estimation, and calculate the new values of $\mu$ and $\sigma$.
 
 While this is a relatively simple model, it works surprisingly well in practice.
 
