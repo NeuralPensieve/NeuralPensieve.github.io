@@ -1,6 +1,6 @@
 # How many words do you know?
 
-A few years back, I started wondering: what’s the minimum number of questions you’d need to ask someone to figure out the size of their vocabulary? Of course, asking random questions is not exactly optimal, and clearly the best solution would involve some kind of exploration-exploitation trade-off, but I never got around to actually solve it. Now that I’ve got some free time, I figured I’d give it a shot.
+A few years back, I started wondering: what’s the minimum number of questions you’d need to ask someone to figure out the size of their vocabulary? Of course, asking random questions is not exactly optimal, and clearly the best solution would involve some kind of exploration-exploitation trade-off, but I never got around to actually work on it. Now that I’ve got some free time, I figured I’d give it a shot.
 
 Here’s how I’ve been conceptualizing the problem: imagine having a list of all words, ranked by their difficulty. If I assign a prior probability to each of these words and begin sampling from this distribution, I can use the answers to update the prior, repeating the process iteratively. This is essentially a version of Thompson Sampling.
 
