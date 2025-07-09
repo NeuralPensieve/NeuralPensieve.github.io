@@ -1,7 +1,7 @@
 # How to Tame Your Deep RL
 
-<div style="text-align: center;">
-    <img src="/img/tame_rl/rl.png" alt="" style="width: 100%;">
+<div style="text-align: center; margin-bottom: 2em;">
+    <img src="/img/tame_rl/rl.png" alt="" style="width: 75%;">
 </div>
 
 Running reinforcement learning (RL) experiments—especially when implementing models yourself—is notoriously more challenging than typical supervised learning (SL) experiments (as attested by none other than Andrej Karpathy [here](https://news.ycombinator.com/item?id=13519044)). SL models are generally well-behaved: they converge predictably, respond well to cross-validation, and scale efficiently on GPUs. Deep RL models, however, are entirely different beasts...
