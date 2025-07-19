@@ -45,20 +45,20 @@ Here's the beautiful connection that makes everything work.
 Consider what happens when we add Gaussian noise to samples from distribution $P(x)$. The distribution becomes "smoother" and spreads out. Keep adding noise, and we eventually get pure Gaussian noise. This is the forward diffusion process—we're essentially convolving $P(x)$ with progressively larger Gaussian kernels.
 
 <div style="text-align: center; margin-bottom: 2em;">
-    <img src="/img/diffusion/convolutions.png" alt="" style="width: 75%;">
+    <img src="/img/diffusion/convolutions.png" alt="" style="width: 100%;">
 </div>
 
 Now consider the reverse: if we can go from a noisier version of the distribution to a less noisy one, we're moving in the direction of the gradient of the log-probability!
 
 Here's the mathematical key. For a noisy version $x_t$ with noise level $\sigma_t$, we have:
 
-$\nabla_x \log p_t(x_t) = -\frac{1}{\sigma_t^2}(x_t - E[x_0|x_t])$
+$$\nabla_x \log p_t(x_t) = -\frac{1}{\sigma_t^2}(x_t - E[x_0|x_t])$$
 
 where $E[x_0|x_t]$ is the expected clean image given the noisy observation. This is straightforward to derive from the Gaussian noise model.
 
 But $E[x_0|x_t]$ is exactly what a denoiser estimates! So:
 
-$\nabla_x \log p_t(x_t) \approx \frac{1}{\sigma_t^2}(\text{Denoiser}(x_t) - x_t)$
+$$\nabla_x \log p_t(x_t) \approx \frac{1}{\sigma_t^2}(\text{Denoiser}(x_t) - x_t)$$
 
 This is the core insight: **the direction a denoiser moves an image is proportional to the score function we need for sampling.**
 
@@ -84,7 +84,7 @@ where $\bar{\alpha}_t$ comes from the noise schedule and $\epsilon \sim N(0, I)$
 
 The training objective is simple: predict the noise $\epsilon$ that was added.
 
-$\text{Loss} = E[||\epsilon - \epsilon_\theta(x_t, t)||^2]$
+$$\text{Loss} = E[||\epsilon - \epsilon_\theta(x_t, t)||^2]$$
 
 where $\epsilon_\theta$ is our neural network (typically a U-Net) that takes as input the noisy image $x_t$ and timestep $t$.
 
