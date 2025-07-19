@@ -52,11 +52,11 @@ Now consider the reverse: if we can go from a noisier version of the distributio
 
 Here's the mathematical key. For a noisy version $x_t$ with noise level $\sigma_t$, we have:
 
-$$\nabla_x \log p_t(x_t) = -\frac{1}{\sigma_t^2}(x_t - E[x_0|x_t])$$
+$$\nabla_x \log p_t(x_t) = -\frac{1}{\sigma_t^2}(x_t - E[x_0 \mid x_t])$$
 
-where $E[x_0|x_t]$ is the expected clean image given the noisy observation. This is straightforward to derive from the Gaussian noise model.
+where $E[x_0 \mid x_t]$ is the expected clean image given the noisy observation. This is straightforward to derive from the Gaussian noise model.
 
-But $E[x_0|x_t]$ is exactly what a denoiser estimates! So:
+But $E[x_0 \mid x_t]$ is exactly what a denoiser estimates! So:
 
 $$\nabla_x \log p_t(x_t) \approx \frac{1}{\sigma_t^2}(\text{Denoiser}(x_t) - x_t)$$
 
