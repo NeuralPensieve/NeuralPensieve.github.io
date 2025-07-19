@@ -16,7 +16,7 @@ So we have a clear picture: the distribution of good images forms complex, unkno
 
 ## Langevin Sampling: The Foundation
 
-The key insight comes from Langevin dynamics. If we want to sample from some distribution P(x), we can start from a random point and iteratively move toward high-probability regions using the **score function** (gradient of the log-probability).
+The key insight comes from Langevin dynamics. If we want to sample from some distribution P(x), we can start from a random point and iteratively move toward high-probability regions using the **score function** (gradient of the log-probability). Think of this as gradient ascent on log-probability density, but with strategic noise injection to prevent mode collapse, and facilitate exploration.
 
 The discretized Langevin sampling algorithm for a distribution P(x):
 
@@ -24,17 +24,17 @@ The discretized Langevin sampling algorithm for a distribution P(x):
 sample x from N(0, 1)
 for t in range(T):
     sample z from N(0, 1)
-    x = x + 0.5 * eps * ∇_x log P(x) + sqrt(eps) * z
+    x = x + 0.5 * ε * ∇_x log P(x) + sqrt(ε) * z
 return x
 ```
 
-where eps is a step size hyperparameter. Let's address the key questions:
+where ε is a step size hyperparameter, much like learning rate. Let's address the key questions:
 
 **Why the gradient?** We want higher probability of sampling from high-probability regions. The gradient points toward areas of increasing probability density.
 
-**Why gradient of $\log P(x)$?** The log transform has nice properties: where $P(x)$ is very small, $\nabla \log P(x)$ becomes large, so we move faster toward probability mass. Where $P(x)$ is large, the gradient is smaller, preventing overshooting.
+**Why gradient of log P(x)?** The log transform has nice properties: where $P(x)$ is very small, $\nabla \log P(x)$ becomes large, so we move faster toward probability mass. Where $P(x)$ is large, the gradient is smaller, preventing overshooting.
 
-**Why add noise?** Without noise, we'd converge to local modes. The noise term enables exploration across different modes of the distribution, giving us diverse samples rather than just point estimates.
+**Why add noise?** It's obvious that without noise, we'd converge to local modes (much like gradient ascent!). The noise term enables exploration across different modes of the distribution, giving us diverse samples rather than just point estimates.
 
 This extends naturally to high dimensions where our image space lives. The problem remains: how do we compute $\nabla_x \log P(x)$ when we don't know $P(x)$?
 
@@ -116,7 +116,7 @@ However, the naming is honestly a bit confusing and could be better! These model
 
 ### How do people use prompts to generate images?
 
-This is where conditioning comes in, and it's actually quite elegant! The core idea is to modify our denoising network to be conditioned on additional information—in this case, text embeddings.
+This is where conditioning comes in, and it actually does not require much change! The core idea is to modify our denoising network to be conditioned on additional information—in this case, text embeddings.
 
 Instead of just training ε_θ(x_t, t), we train ε_θ(x_t, t, c) where c is the conditioning information. For text prompts, c is typically created by:
 
