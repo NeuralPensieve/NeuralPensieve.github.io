@@ -1,5 +1,9 @@
 # Teaching (tiny) LLMs to Play Text-Based Games Using RL (on a $300 GPU)
 
+<div style="text-align: center; margin-bottom: 2em;">
+    <img src="/img/rl_llm_textworld/tiny_llm_learning_1.jpeg" alt="" style="width: 100%;">
+</div>
+
 **TL;DR:** I trained small LLMs like GPT-2 to play text-based games using reinforcement learning (PPO) on my budget GPU. Key innovations: token-level PPO for richer signals and trie-based masking to ensure only valid actions. It worked well on with various levels of difficulty, with techniques applicable to real-world structured outputs. Code on GitHub, results show generalization, and I share lessons from the process.
 Being on a career break has allowed me to focus on learning, and doing projects I like. I've always been fascinated by reinforcement learning, and I wanted to understand how RL applies to large language models. So I came up with this idea to teach small LLMs to play text-based games-a perfect mini-project to deepen my understanding of both RL and LLMs.
 
@@ -13,7 +17,7 @@ My main constraint was solving this using my own PC—a $300 RTX 3060 with only 
 
 Text-based games like TextWorld work like this: You're in a situation with an objective/quest. You take an action, receive rewards based on that action, and move to the next state. It's a perfect example of a problem that can be handled with reinforcement learning, with customizable difficulty settings.
 
-```
+```text
                     ________  ________  __    __  ________
                    |        \|        \|  \  |  \|        \
                     \$$$$$$$$| $$$$$$$$| $$  | $$ \$$$$$$$$
@@ -63,12 +67,15 @@ When an LLM tries to play this game, the text above becomes the prompt. The LLM 
 2. Understand the correct sequence
 3. Generate syntactically valid commands that the game engine accepts
 
-This might seem trivial for modern LLMs like GPT-4, but for a 137M parameter GPT-2 model that was never trained on instructions, it's a significant achievement.
+This might seem trivial for modern LLMs like Claude, and GPT-5, but for a 137M parameter GPT-2 model that was never trained on instructions, it's a significant achievement.
 
 ### What makes this challenging
 **Valid actions are constrained**: Only specific commands work (e.g., "go north" is valid, but "go northeast" is not).
+
 **Multi-step reasoning required**: Harder difficulties need 3-4 coordinated actions to complete objectives.
+
 **Sparse rewards**: The model only gets meaningful positive reward (+1.0) upon quest completion, with small step penalties (-0.1) along the way.
+
 **No ground truth**: Unlike supervised learning, there's no "correct" action at each step - success is only known at episode completion.
 
 RL is uniquely suited for these kinds of problems, where we have sequential decision making.
@@ -189,8 +196,7 @@ GPT2 allowed me to iterate faster in the beginning, not having to worry about me
 
 ### Looking into Attention Layers
 <video width="600" controls>
-  <source src="img/rl_llm_textworld/comparison.mp4" type="video/mp4">
-  Your browser does not support the video tag.
+  <source src="{{ site.baseurl }}/img/rl_llm_textworld/comparison.mp4" type="video/mp4">
 </video>
 
 I was curious to know how the LLM attention layers change after the fine-tuning, so I did some visualization before and after. (The video shows attention patterns across 24 layers for pretrained vs. fine-tuned models.) I looked at all 24 layers of attention and saw some interesting patterns: 
