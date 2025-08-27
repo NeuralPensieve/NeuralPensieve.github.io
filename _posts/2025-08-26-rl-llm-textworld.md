@@ -5,6 +5,9 @@
 </div>
 
 **TL;DR:** I trained small LLMs like GPT-2 to play text-based games using reinforcement learning (PPO) on my budget GPU. Key innovations: token-level PPO for richer signals and trie-based masking to ensure only valid actions. It worked well on with various levels of difficulty, with techniques applicable to real-world structured outputs. Code on GitHub, results show generalization, and I share lessons from the process.
+
+---
+
 Being on a career break has allowed me to focus on learning, and doing projects I like. I've always been fascinated by reinforcement learning, and I wanted to understand how RL applies to large language models. So I came up with this idea to teach small LLMs to play text-based games-a perfect mini-project to deepen my understanding of both RL and LLMs.
 
 Initially, I thought this was something I could do in a week or so, but it took more like 3 weeks. The reason? I solved this without following published papers or established methodologies. I banged my head against some walls (quite a bit!), but eventually came up with a solid working solution.
