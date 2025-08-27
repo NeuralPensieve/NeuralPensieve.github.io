@@ -195,9 +195,9 @@ I experimented with two base models:
 GPT2 allowed me to iterate faster in the beginning, not having to worry about memory too much. Qwen2.5, however, took the cake when it came to training models for harder environments. As you can see in the figure above, Qwen2.5 learned a lot faster than GPT2. I believe a much larger model would be able to be fine-tuned much faster and achieve better results. But I cannot fit and train a 7B parameter model on my GPU. Maybe methods like QLoRA would help, but in my limited experimentation, LoRA slowed down the training while not resulting in drastic VRAM usage cuts I was expecting.
 
 ### Looking into Attention Layers
-<video width="600" controls>
-  <source src="{{ site.baseurl }}/img/rl_llm_textworld/comparison.mp4" type="video/mp4">
-</video>
+<div style="text-align: center; margin-bottom: 2em;">
+    <img src="/img/rl_llm_textworld/comparison.gif" alt="" style="width: 100%;">
+</div>
 
 I was curious to know how the LLM attention layers change after the fine-tuning, so I did some visualization before and after. (The video shows attention patterns across 24 layers for pretrained vs. fine-tuned models.) I looked at all 24 layers of attention and saw some interesting patterns: 
 - Both models often attend to the first and last tokens in the prompt.
