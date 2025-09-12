@@ -43,3 +43,25 @@ hr {
   font-size: 2.5em;
   opacity: 0.3;
 }
+
+.post-content h1 {
+  font-size: 2.2rem; /* Largest */
+}
+
+.post-content h2 {
+  font-size: 1.8rem; /* Medium */
+}
+
+.post-content h3 {
+  font-size: 1.4rem; /* Smaller */
+}
+
+.post-content h4 {
+  font-size: 1.2rem; /* Even smaller */
+}
+
+.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6 {
+  font-weight: 600; /* Makes headings a bit bolder */
+  margin-top: 2em;
+  margin-bottom: 0.8em;
+}
