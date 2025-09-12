@@ -74,3 +74,13 @@ hr {
   margin-top: 2em;
   margin-bottom: 0.8em;
 }
+
+pre,
+code {
+  white-space: pre-wrap;
+  /* CSS3 */
+  word-wrap: break-word;
+  /* Internet Explorer 5.5+ */
+  overflow-wrap: break-word;
+  /* Current standard */
+}
