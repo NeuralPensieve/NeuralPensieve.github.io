@@ -44,16 +44,25 @@ hr {
   opacity: 0.3;
 }
 
+.post-content h1,
+.post-content h2,
+.post-content h3 {
+  margin-top: 1.8em !important;
+  /* Controls the space ABOVE the heading */
+  margin-bottom: 0.6em !important;
+  /* Controls the space BELOW the heading */
+}
+
 .post-content h1 {
-  font-size: 2.2rem !important;
+  font-size: 1.9rem !important;
 }
 
 .post-content h2 {
-  font-size: 1.8rem !important;
+  font-size: 1.6rem !important;
 }
 
 .post-content h3 {
-  font-size: 1.4rem !important;
+  font-size: 1.25rem !important;
 }
 
 .post-content h4 {
