@@ -1,7 +1,7 @@
-# Beyond REINFORCE: How TRPO and PPO Master the Art of Stable Learning
+# The Art of Safe Policy Updates: From REINFORCE to TRPO and PPO
 
 <div style="text-align: center; margin-bottom: 2em;">
-    <img src="/img/trpo-ppo/cartoon.png" alt="" style="width: 100%;"><figurecaption>Policy gradient methods are like climbing a treacherous mountain to find the highest peak. Better use a harness like TRPO or PPO!</figurecaption>
+    <img src="/img/trpo-ppo/cartoon.png" alt="" style="width: 100%;"><figurecaption>Policy gradient methods are like climbing a treacherous terrain to find the highest peak. Better use a harness like TRPO or PPO!</figurecaption>
 </div>
 
 **Proximal Policy Optimization (PPO)** has become the de facto algorithm for reinforcement learning across an astonishing range of applications. It powers the fine-tuning of large language models like ChatGPT, enables AI systems to master complex games like Dota 2 and StarCraft II, and controls robots learning to walk, manipulate objects, and navigate environments. Despite its ubiquity, many practitioners treat PPO as a black box, missing the elegant theoretical insights that make it so effective.
@@ -34,18 +34,23 @@ Let's define our key terms:
 The derivation proceeds in four key steps:
 
 **Step 1:** Start with our objective—the gradient of expected return:
+
 $$\nabla_\theta J(\theta) = \nabla_\theta \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)] = \nabla_\theta \int P(\tau; \theta) R(\tau) d\tau$$
 
 **Step 2:** Apply the log-derivative trick using the identity $\nabla_x f(x) = f(x) \nabla_x \log f(x)$:
+
 $$\nabla_\theta J(\theta) = \int P(\tau; \theta) \nabla_\theta \log P(\tau; \theta) R(\tau) d\tau$$
 
 **Step 3:** Recognize this as an expectation we can sample:
+
 $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} [\nabla_\theta \log P(\tau; \theta) R(\tau)]$$
 
 **Step 4:** Simplify using the fact that environment dynamics don't depend on policy parameters:
+
 $$\nabla_\theta \log P(\tau; \theta) = \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t)$$
 
 This gives us the final **policy gradient theorem**:
+
 $$\nabla_\theta J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta} \left[ \left( \sum_{t=0}^{T-1} \nabla_\theta \log \pi_\theta(a_t|s_t) \right) R(\tau) \right]$$
 
 This elegant result tells us we can estimate gradients by collecting trajectories and increasing the probability of actions that led to high rewards while decreasing the probability of those that led to poor outcomes.
@@ -105,7 +110,7 @@ $$\text{subject to } \mathbb{E}_{s \sim \pi_{\theta_{old}}} \left[ D_{KL}(\pi_{\
 
 Let's break this down:
 
-- **The objective** uses per-step importance sampling ratios (not trajectory-level ratios, which would have explosive variance) multiplied by the **advantage function** $\hat{A}_{\theta_{old}}(s,a)$, which measures how much better action $a$ is compared to the average action in state $s$.
+- **The objective** uses per-step importance sampling ratios (not trajectory-level ratios, which would have explosive variance) multiplied by the **advantage function** $\hat{A}(s,a)$, which measures how much better action $a$ is compared to the average action in state *s*.
 
 - **The constraint** defines our trust region using **KL divergence**—a measure of how different two probability distributions are. By keeping $D_{KL} \leq \delta$, we ensure the new and old policies remain similar enough for importance sampling to work reliably.
 
@@ -183,13 +188,13 @@ PPO replaces TRPO's constrained optimization with an unconstrained objective tha
 
 $$L^{CLIP}(\theta) = \mathbb{E}_t[ \min(r_t(\theta) \hat{A}_t, \text{clip}(r_t(\theta), 1 - \epsilon, 1 + \epsilon) \hat{A}_t) ]$$
 
-where $r_t(\theta) = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_{old}}(a_t|s_t)}$ is the importance sampling ratio.
+where $r_t(\theta) = \frac{\pi_\theta(a_t \mid s_t)}{\pi_{\theta_{old}}(a_t \mid s_t)}$ is the importance sampling ratio.
 
 This objective implements a brilliant heuristic: reward the policy for good actions and penalize it for bad ones, but only up to a reasonable limit defined by the clipping range $[1-\epsilon, 1+\epsilon]$.
 
 #### Understanding the Clipping Mechanism
 
-The `min` function creates different behaviors depending on whether an action was beneficial:
+The *min* function creates different behaviors depending on whether an action was beneficial:
 
 **For good actions** ($\hat{A}_t > 0$): We want to increase their probability, meaning we want $r_t > 1$.
 - If the increase is modest ($r_t \leq 1+\epsilon$): The algorithm uses the normal objective $r_t \hat{A}_t$
